@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema({
-    userName: {
+    username: {
         type: String,
         unique: true,
         required: true,
@@ -9,12 +9,7 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        validate: {
-            validator: function(v) {
-                return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
-            },
-            message: props => `${props.value} is not a valid email!`
-        },
+        match: [/^([a-z0-9_-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/],
         required: true,
         unique: true
     },
